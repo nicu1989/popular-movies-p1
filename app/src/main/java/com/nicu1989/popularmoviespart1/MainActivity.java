@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         mMoviesList.setLayoutManager(layoutManager);
         mMoviesList.setHasFixedSize(true);
 
-        mAdapter = new MovieAdapter(9);
+        mAdapter = new MovieAdapter(30);
 
         mMoviesList.setAdapter(mAdapter);
     }

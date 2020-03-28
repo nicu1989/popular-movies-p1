@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private int mNumberItems;
@@ -55,8 +57,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         }
 
         void bind(int listIndex) {
+            //Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView);
+            Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(listItemImageView);
 
-            listItemImageView.setImageResource(R.drawable.x_test);
+            //listItemImageView.setImageResource(R.drawable.x_test);
         }
     }
 }
