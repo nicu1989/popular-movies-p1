@@ -1,22 +1,30 @@
 package com.nicu1989.popularmoviespart1;
 
 import android.content.Context;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private int mNumberItems;
+    private boolean isPostersListInit = false;
+    private List<String> mMoviePostersList;
+    final private ListItemClickListener mOnClickListener;
+
+    public interface ListItemClickListener {
+        void onListItemClick(int clickedItemIndex);
+    }
+
 
     @NonNull
     @Override
@@ -43,11 +51,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return mNumberItems;
     }
 
-    public MovieAdapter(int numberOfItems) {
+    public MovieAdapter(int numberOfItems, ListItemClickListener listener) {
+        mOnClickListener = listener;
         mNumberItems = numberOfItems;
     }
 
-    class MovieViewHolder extends RecyclerView.ViewHolder {
+    public void setMovieLists(List<String> postersList){
+        mMoviePostersList = postersList;
+        isPostersListInit = true;
+    }
+
+    class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView listItemImageView;
 
@@ -55,13 +69,24 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             super(itemView);
 
             listItemImageView = itemView.findViewById(R.id.iv_poster_item);
+            listItemImageView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int clickedPosition = getAdapterPosition();
+            mOnClickListener.onListItemClick(clickedPosition);
         }
 
         void bind(int listIndex) {
             //Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView);
-            Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(listItemImageView);
-
-            //listItemImageView.setImageResource(R.drawable.x_test);
+            if (isPostersListInit) {
+                String posterPath = "https://image.tmdb.org/t/p/w185/" + mMoviePostersList.get(listIndex);
+                Picasso.get().load(posterPath).into(listItemImageView);
+            }
+            else{
+                Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(listItemImageView);
+            }
         }
     }
 }

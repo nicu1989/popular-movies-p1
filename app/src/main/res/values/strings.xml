@@ -3,4 +3,8 @@
     <string name="movie_poster">Movie Poster</string>
     <string name="sort_rating">Rating sort</string>
     <string name="sort_popular">Popular sort</string>
+    <string name="movie_title">Original title</string>
+    <string name="movie_plot">Plot</string>
+    <string name="movie_rating">Rating</string>
+    <string name="movie_date">Date</string>
 </resources>
