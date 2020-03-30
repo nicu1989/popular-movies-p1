@@ -2,7 +2,7 @@
 Udacity Android Developer ND
 
 
-### What this app do:
+### What this app does:
 - Present the user with a grid arrangement of movie posters upon launch.
 - Allow your user to change sort order via a setting:
 - The sort order can be by most popular or by highest-rated
