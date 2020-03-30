@@ -192,12 +192,16 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
     }
 
     private void processJSONToLayout(){
-        int numberOfLayoutItems = 0;
+        int numberOfLayoutItems = 20;
 
         try {
             JSONArray results = mResponseJSON.getJSONArray("results");
+            mPostersList.clear();
+            mTitleList.clear();
+            mPlotList.clear();
+            mRatingList.clear();
+            mDateList.clear();
 
-            numberOfLayoutItems = 20;//(int)numberOfMovies/numberOfPages;
             for (int i = 0; i < (numberOfLayoutItems); i++){
                 JSONObject movieObject = results.getJSONObject(i);
                 String moviePoster = movieObject.getString("poster_path");

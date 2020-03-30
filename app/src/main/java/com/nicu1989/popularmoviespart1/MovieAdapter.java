@@ -34,9 +34,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View view = inflater.inflate(layoutIdForListItem, parent, false);
-        MovieViewHolder viewHolder = new MovieViewHolder(view);
 
-        return viewHolder;
+        return new MovieViewHolder(view);
     }
 
     @Override
@@ -51,12 +50,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return mNumberItems;
     }
 
-    public MovieAdapter(int numberOfItems, ListItemClickListener listener) {
+    MovieAdapter(int numberOfItems, ListItemClickListener listener) {
         mOnClickListener = listener;
         mNumberItems = numberOfItems;
     }
 
-    public void setMovieLists(List<String> postersList){
+    void setMovieLists(List<String> postersList){
         mMoviePostersList = postersList;
         isPostersListInit = true;
     }
@@ -65,7 +64,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         ImageView listItemImageView;
 
-        public MovieViewHolder(@NonNull View itemView) {
+        MovieViewHolder(@NonNull View itemView) {
             super(itemView);
 
             listItemImageView = itemView.findViewById(R.id.iv_poster_item);
@@ -79,7 +78,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         }
 
         void bind(int listIndex) {
-            //Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView);
             if (isPostersListInit) {
                 String posterPath = "https://image.tmdb.org/t/p/w185/" + mMoviePostersList.get(listIndex);
                 Picasso.get().load(posterPath).into(listItemImageView);
